@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Register Application</string>
-    <string name="loginhere">Belum Punya akun? <u>Register</u></string>
+    <string name="loginhere"><u>Register</u></string>
     <string-array name="gender_options">
-        <item>Male</item>
-        <item>Female</item>
-        <item>Other</item>
+        <item>Pilih Jenis kelamin</item>
+        <item>Laki-laki</item>
+        <item>Perempuan</item>
     </string-array>
 </resources>

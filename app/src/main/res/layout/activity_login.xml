@@ -16,34 +16,19 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/etPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pln_username" />
 
-    <EditText
-        android:id="@+id/pln_username"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="text"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
     <Button
         android:id="@+id/btn_login2"
@@ -56,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -73,14 +58,45 @@
         android:id="@+id/txt_donthaveaccount"
         android:layout_width="249dp"
         android:layout_height="26dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="text"
         android:text="@string/loginhere"
+        android:textAlignment="textEnd"
+        android:textColor="#117554"
         android:textSize="3mm"
+
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/btn_login2"
+        app:layout_constraintHorizontal_bias="0.387"
         app:layout_constraintStart_toStartOf="@+id/btn_login2"
         app:layout_constraintTop_toBottomOf="@+id/btn_login2" />
+
+    <TextView
+        android:id="@+id/txt_belumpunyakun"
+        android:layout_width="174dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="32dp"
+        android:text="Belum punya akun?"
+        android:textSize="3mm"
+        app:layout_constraintStart_toStartOf="@+id/btn_login2"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login2" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

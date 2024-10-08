@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Dashboard">
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="473dp"
+        android:layout_height="1028dp"
+        android:background="@drawable/border"
+        tools:layout_editor_absoluteX="-22dp"
+        tools:layout_editor_absoluteY="-37dp" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="126dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="96dp"
+        android:text="logout"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.94" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="271dp"
+        android:layout_height="424dp"
+        android:layout_marginTop="60dp"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:id="@+id/tvFullname"
+            android:layout_width="297dp"
+            android:layout_height="47dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="299dp"
+            android:layout_height="49dp"
+            android:layout_below="@id/tvFullname"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="302dp"
+            android:layout_height="43dp"
+            android:layout_below="@id/tvUsername"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvGender"
+            android:layout_width="302dp"
+            android:layout_height="43dp"
+            android:layout_below="@id/tvEmail"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="296dp"
+            android:layout_height="44dp"
+            android:layout_below="@id/tvGender"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvPhone"
+            android:layout_width="302dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/tvAddress"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvTanggal"
+            android:layout_width="302dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/tvPhone"
+            android:layout_marginTop="17dp" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
