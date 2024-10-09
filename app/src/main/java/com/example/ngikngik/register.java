@@ -121,7 +121,7 @@ public class register extends AppCompatActivity {
 //        }
 
 
-        etFullname = (EditText) findViewById(R.id.etFullname);
+//        etFullname = (EditText) findViewById(R.id.etFullname);
         etUsername = (EditText) findViewById(R.id.etUsername);
         etEmail = (EditText) findViewById(R.id.etEmailLogin);
         etPassword = (EditText) findViewById(R.id.etPasswordLogin);
@@ -149,7 +149,7 @@ public class register extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String fullname = etFullname.getText().toString();
+//                String fullname = etFullname.getText().toString();
                 String username = etUsername.getText().toString();
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
@@ -192,7 +192,10 @@ public class register extends AppCompatActivity {
 //                            if (putData.onComplete()) {
 //                                String result = putData.getResult();
                                 //End ProgressBar (Set visibility to GONE)
-                    if (fullname.isEmpty() || username.isEmpty() || password.isEmpty() || birthdate.isEmpty() || address.isEmpty()) {
+
+                    if (
+//                            fullname.isEmpty() ||
+                            username.isEmpty() || password.isEmpty() || birthdate.isEmpty() || address.isEmpty()) {
                         Toast.makeText(register.this, "Isi Semua Kolom di atas", Toast.LENGTH_SHORT).show();
                     } else if (phone.isEmpty()) {
                         Toast.makeText(register.this, "Masukkan nomor telepon", Toast.LENGTH_SHORT).show();
@@ -218,7 +221,9 @@ public class register extends AppCompatActivity {
                     }  }
         });
     }
-        public boolean checkNetworkConnection() {
+
+
+    public boolean checkNetworkConnection() {
             ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
             return (networkInfo != null && networkInfo.isConnected());
@@ -235,7 +240,7 @@ public class register extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        etBirthdate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        etBirthdate.setText(year + "-" + (month + 1) + "-" +dayOfMonth );
                     }
                 },
                 year, month, day);

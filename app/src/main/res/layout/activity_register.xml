@@ -39,19 +39,12 @@
             android:padding="16dp">
 
             <EditText
-                android:id="@+id/etFullname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_username"
-                android:hint=" Fullname" />
-
-            <EditText
                 android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:drawableEnd="@drawable/ic_person"
-                android:hint=" Username" />
+                android:hint=" Nama Siswa" />
 
             <EditText
                 android:id="@+id/etEmailLogin"

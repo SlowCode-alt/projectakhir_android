@@ -2,8 +2,7 @@
     <string name="app_name">Register Application</string>
     <string name="loginhere"><u>Register</u></string>
     <string-array name="gender_options">
-        <item>Pilih Jenis kelamin</item>
-        <item>Laki-laki</item>
-        <item>Perempuan</item>
+        <item>Siswa</item>
+        <item>Pengajar</item>
     </string-array>
 </resources>
