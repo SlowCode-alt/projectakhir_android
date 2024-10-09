@@ -32,6 +32,5 @@ public class landing extends AppCompatActivity {
                 startActivity(intent);
             };
         },3000);
-        return false;
     }
 }

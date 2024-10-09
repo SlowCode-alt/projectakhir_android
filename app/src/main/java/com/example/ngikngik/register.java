@@ -34,6 +34,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -120,16 +121,16 @@ public class register extends AppCompatActivity {
 //        }
 
 
-        etFullname = findViewById(R.id.etFullname);
-        etUsername = findViewById(R.id.etUsername);
-        etEmail = findViewById(R.id.etEmail);
-        etPassword = findViewById(R.id.etPassword);
-        etVerificationPassword = findViewById(R.id.etVerificationPassword);
-        etBirthdate = findViewById(R.id.etBirthdate);
-        etAddress = findViewById(R.id.etAddress);
-        spinnerGender = findViewById(R.id.spinnerGender);
-        btnRegister = findViewById(R.id.btnRegister);
-        etPhone = findViewById(R.id.etPhone);
+        etFullname = (EditText) findViewById(R.id.etFullname);
+        etUsername = (EditText) findViewById(R.id.etUsername);
+        etEmail = (EditText) findViewById(R.id.etEmailLogin);
+        etPassword = (EditText) findViewById(R.id.etPasswordLogin);
+        etVerificationPassword = (EditText)  findViewById(R.id.etVerificationPassword);
+        etBirthdate = (EditText) findViewById(R.id.etBirthdate);
+        etAddress = (EditText) findViewById(R.id.etAddress);
+        spinnerGender = (Spinner) findViewById(R.id.spinnerGender);
+        btnRegister = (Button) findViewById(R.id.btnRegister);
+        etPhone = (EditText) findViewById(R.id.etPhone);
         progressDialog = new ProgressDialog(register.this);
 
         etBirthdate.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +140,12 @@ public class register extends AppCompatActivity {
             }
         });
 
+
+//                        }
+//                        //End Write and Read data with URL
+//                    }
+//                });    //End Write and Read data with URL
+//             }
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,9 +159,10 @@ public class register extends AppCompatActivity {
                 String gender = spinnerGender.getSelectedItem().toString();
                 String phone = etPhone.getText().toString();
 
+
+
 //                Handler handler = new Handler();
 //
-    }
 //                handler.post(new Runnable() {
 //                    @Override
 //                    public void run() {
@@ -184,43 +192,37 @@ public class register extends AppCompatActivity {
 //                            if (putData.onComplete()) {
 //                                String result = putData.getResult();
                                 //End ProgressBar (Set visibility to GONE)
-                if (fullname.isEmpty() || username.isEmpty() || password.isEmpty() || birthdate.isEmpty() || address.isEmpty()) {
-                    Toast.makeText(register.this, "Isi Semua Kolom di atas", Toast.LENGTH_SHORT).show();
-                } else if (phone.isEmpty()) {
-                    Toast.makeText(register.this, "Masukkan nomor telepon", Toast.LENGTH_SHORT).show();
-                } else if (!password.equals(verifyPassword)) {
-                    Toast.makeText(register.this, "Password tidak sama", Toast.LENGTH_SHORT).show();
-                } else if (!android.text.TextUtils.isDigitsOnly(phone)) {
+                    if (fullname.isEmpty() || username.isEmpty() || password.isEmpty() || birthdate.isEmpty() || address.isEmpty()) {
+                        Toast.makeText(register.this, "Isi Semua Kolom di atas", Toast.LENGTH_SHORT).show();
+                    } else if (phone.isEmpty()) {
+                        Toast.makeText(register.this, "Masukkan nomor telepon", Toast.LENGTH_SHORT).show();
+                    } else if (!password.equals(verifyPassword)) {
+                        Toast.makeText(register.this, "Password tidak sama", Toast.LENGTH_SHORT).show();
+                    } else if (!android.text.TextUtils.isDigitsOnly(phone)) {
                     Toast.makeText(register.this, "Nomor telepon hanya boleh berisi angka", Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent intent = new Intent(register.this, login.class);
-                    intent.putExtra("email", email); // Kirim email ke LoginActivity
-                    intent.putExtra("password", password);
-                    intent.putExtra("fullname", fullname);
-                    intent.putExtra("username", username);
-                    intent.putExtra("gender", gender);
-                    intent.putExtra("birthdate", birthdate);
-                    intent.putExtra("address", address);
-                    intent.putExtra("phone", phone);
-                    startActivity(intent);
-                    Toast.makeText(register.this, "Registrasi berhasil", Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(register.this, login.class);
+//                        intent.putExtra("email", email); // Kirim email ke LoginActivity
+//                        intent.putExtra("password", password);
+//                        intent.putExtra("fullname", fullname);
+//                        intent.putExtra("username", username);
+//                        intent.putExtra("gender", gender);
+//                        intent.putExtra("birthdate", birthdate);
+//                        intent.putExtra("address", address);
+//                        intent.putExtra("phone", phone);
+//                        startActivity(intent);
+                        Toast.makeText(register.this, "Registrasi berhasil", Toast.LENGTH_SHORT).show();
 
 
-                    finish();
-                }
-                            }
-//                        }
-//                        //End Write and Read data with URL
-//                    }
-//                });    //End Write and Read data with URL
-//             }
+                        finish();
+                    }  }
         });
-        return false;
     }
-//        public boolean checkNetworkConnection(){
-//        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-//        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-//        return (networkInfo != null && networkInfo.isConnected() );
+        public boolean checkNetworkConnection() {
+            ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            return (networkInfo != null && networkInfo.isConnected());
+        }
 
     private void showDatePickerDialog() {
         Calendar calendar = Calendar.getInstance();

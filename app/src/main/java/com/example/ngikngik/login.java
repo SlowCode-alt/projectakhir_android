@@ -4,14 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.net.Network;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,13 +23,11 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,7 +50,66 @@ public class login extends AppCompatActivity {
             return insets;
         });
 
-        public void checklogin(final String email, final String password){
+//        btnLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Ambil input dari EditText
+//                String emailInput = etEmail.getText().toString();
+//                String passwordInput = etPassword.getText().toString();
+//
+//                // Logika verifikasi login
+//                if (emailInput.equals(email) && passwordInput.equals(password)) {
+//                    // Kirim data dari EditText ke Dashboard
+//                    Intent dashboardIntent = new Intent(login.this, Dashboard.class);
+//                    dashboardIntent.putExtra("fullname", getIntent().getStringExtra("fullname"));
+//                    dashboardIntent.putExtra("username", getIntent().getStringExtra("username"));
+//                    dashboardIntent.putExtra("email", emailInput);  // Data dari EditText
+//                    dashboardIntent.putExtra("gender", getIntent().getStringExtra("gender"));
+//                    dashboardIntent.putExtra("birthdate", getIntent().getStringExtra("birthdate"));
+//                    dashboardIntent.putExtra("address", getIntent().getStringExtra("address"));
+//                    dashboardIntent.putExtra("phone", getIntent().getStringExtra("phone"));
+//
+//                    startActivity(dashboardIntent);
+//                    finish(); // Tutup LoginActivity
+//                } else {
+//                    Toast.makeText(login.this, "Email atau Password salah", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+
+        // Dapatkan data yang dikirim dari RegisterActivity
+//        Intent intent = getIntent();
+//        String email = intent.getStringExtra("email");
+//        String password = intent.getStringExtra("password");
+//        if (email != null) {
+//            etEmail.setText(email);
+//        }
+
+
+        etEmail = (EditText) findViewById(R.id.etEmailLogin);
+        etPassword = (EditText) findViewById(R.id.etPasswordLogin);
+        btnLogin = (Button) findViewById(R.id.btn_login2);
+        progressDialog = new ProgressDialog(login.this);
+        textViewLogin = findViewById(R.id.txt_donthaveaccount);
+        textViewLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), register.class);
+                startActivity(intent);
+            }
+
+        });
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = etEmail.getText().toString();
+                String password = etPassword.getText().toString();
+
+                CheckLogin(email, password);
+            }
+        });
+    }
+        public void CheckLogin(final String email, final String password){
             if(checkNetworkConnection()){
                 progressDialog.show();
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, DbContract.SERVER_LOGIN_URL,
@@ -88,6 +143,7 @@ public class login extends AppCompatActivity {
                         return params;
                     }
                 };
+
                 VolleyConnection.getInstance(login.this).addToRequestQue(stringRequest);
 
                 new Handler().postDelayed(new Runnable() {
@@ -101,55 +157,12 @@ public class login extends AppCompatActivity {
             }
         }
         // Inisialisasi EditText untuk email dan password
-        etEmail = findViewById(R.id.etEmail);
-        etPassword = findViewById(R.id.etPassword);
-        btnLogin = findViewById(R.id.btn_login2);
-        progressDialog = new ProgressDialog(login.this);
-
-        // Dapatkan data yang dikirim dari RegisterActivity
-//        Intent intent = getIntent();
-//        String email = intent.getStringExtra("email");
-//        String password = intent.getStringExtra("password");
-//        if (email != null) {
-//            etEmail.setText(email);
-//        }
 
 
-        textViewLogin = findViewById(R.id.txt_donthaveaccount);
-        textViewLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), register.class);
-                startActivity(intent);
-            }
 
-        });
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Ambil input dari EditText
-                String emailInput = etEmail.getText().toString();
-                String passwordInput = etPassword.getText().toString();
-
-                // Logika verifikasi login
-                if (emailInput.equals(email) && passwordInput.equals(password)) {
-                    // Kirim data dari EditText ke Dashboard
-                    Intent dashboardIntent = new Intent(login.this, Dashboard.class);
-                    dashboardIntent.putExtra("fullname", getIntent().getStringExtra("fullname"));
-                    dashboardIntent.putExtra("username", getIntent().getStringExtra("username"));
-                    dashboardIntent.putExtra("email", emailInput);  // Data dari EditText
-                    dashboardIntent.putExtra("gender", getIntent().getStringExtra("gender"));
-                    dashboardIntent.putExtra("birthdate", getIntent().getStringExtra("birthdate"));
-                    dashboardIntent.putExtra("address", getIntent().getStringExtra("address"));
-                    dashboardIntent.putExtra("phone", getIntent().getStringExtra("phone"));
-
-                    startActivity(dashboardIntent);
-                    finish(); // Tutup LoginActivity
-                } else {
-                    Toast.makeText(login.this, "Email atau Password salah", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+    private boolean checkNetworkConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected() );
     }
 }
