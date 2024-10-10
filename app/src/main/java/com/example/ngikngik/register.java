@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -51,36 +52,43 @@ public class register extends AppCompatActivity {
     private Spinner spinnerGender;
     private Button btnRegister;
 
-    public void CreateDataToServer(final String fullname, final String username, final String email ,final String password ,final String gender , final String tanggal_lahir, final String alamat, final String nomertelepon){
-        if(checkNetworkConnection()){
-            progressDialog.show();
+    public void CreateDataToServer(final String username, final String email, final String password, final String gender, final String tanggal_lahir, final String alamat, final String nomertelepon) {
+        if (checkNetworkConnection()) {
+            progressDialog.show();  // Tampilkan dialog sebelum memulai permintaan
             StringRequest stringRequest = new StringRequest(Request.Method.POST, DbContract.SERVER_REGISTER_URL,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             try {
+                                Log.e("response", response.toString());
                                 JSONObject jsonObject = new JSONObject(response);
                                 String resp = jsonObject.getString("server_response");
-                                if(resp.equals("[{\"status\":\"OK\"}]")) {
+                                if (resp.equals("[{\"status\":\"OK\"}]")) {
                                     Toast.makeText(getApplicationContext(), "Registrasi Berhasil", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(getApplicationContext(),resp, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), resp, Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {
-                                throw new RuntimeException(e);
+                                Log.e("JSON Error", e.toString());
+                            } finally {
+                                // Pastikan untuk menutup dialog di sini
+                                if (progressDialog.isShowing()) {
+                                    progressDialog.dismiss();
+                                }
                             }
-
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
+                    Toast.makeText(getApplicationContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
                 }
             }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
-                    params.put("fullname", fullname);
                     params.put("username", username);
                     params.put("email", email);
                     params.put("password", password);
@@ -114,6 +122,9 @@ public class register extends AppCompatActivity {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            progressDialog.setMessage("Memproses..."); // Menambahkan pesan untuk dialog
+            progressDialog.setCancelable(false); // Menonaktifkan kemampuan untuk membatalkan dialog
+
             return insets;
         });
 
@@ -147,78 +158,33 @@ public class register extends AppCompatActivity {
 //                });    //End Write and Read data with URL
 //             }
         btnRegister.setOnClickListener(new View.OnClickListener() {
+            private Object username;
+
             @Override
             public void onClick(View v) {
 //                String fullname = etFullname.getText().toString();
-                String username = etUsername.getText().toString();
-                String email = etEmail.getText().toString();
-                String password = etPassword.getText().toString();
-                String verifyPassword = etVerificationPassword.getText().toString();
-                String birthdate = etBirthdate.getText().toString();
-                String address = etAddress.getText().toString();
-                String gender = spinnerGender.getSelectedItem().toString();
-                String phone = etPhone.getText().toString();
-
-
-
-//                Handler handler = new Handler();
-//
-//                handler.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        //Starting Write and Read data with URL
-//                        //Creating array for parameters
-//                        String[] field = new String[8];
-//                        field[0] = "fullname";
-//                        field[1] = "username";
-//                        field[2] = "email";
-//                        field[3] = "password";
-//                        field[4] = "verifpassword";
-//                        field[5] = "gender";
-//                        field[6] = "tanggal_lahir";
-//                        field[7] = "alamat";
-//                        //Creating array for data
-//                        String[] data = new String[8];
-//                        data[0] = "fullname";
-//                        data[1] = "username";
-//                        data[2] = "email";
-//                        data[3] = "password";
-//                        data[4] = "verifpassword";
-//                        data[5] = "gender";
-//                        data[6] = "tanggal_lahir";
-//                        data[7] = "alamat";
-//                        PutData putData = new PutData("http://10.10.181.172/LoginRegister/signup.php", "POST", field, data);
-//                        if (putData.startPut()) {
-//                            if (putData.onComplete()) {
-//                                String result = putData.getResult();
-                                //End ProgressBar (Set visibility to GONE)
-
-                    if (
-//                            fullname.isEmpty() ||
-                            username.isEmpty() || password.isEmpty() || birthdate.isEmpty() || address.isEmpty()) {
-                        Toast.makeText(register.this, "Isi Semua Kolom di atas", Toast.LENGTH_SHORT).show();
-                    } else if (phone.isEmpty()) {
-                        Toast.makeText(register.this, "Masukkan nomor telepon", Toast.LENGTH_SHORT).show();
-                    } else if (!password.equals(verifyPassword)) {
-                        Toast.makeText(register.this, "Password tidak sama", Toast.LENGTH_SHORT).show();
-                    } else if (!android.text.TextUtils.isDigitsOnly(phone)) {
+                String Susername = etUsername.getText().toString();
+                String Semail = etEmail.getText().toString();
+                String Spassword = etPassword.getText().toString();
+                String SverifyPassword = etVerificationPassword.getText().toString();
+                String Sbirthdate = etBirthdate.getText().toString();
+                String Saddress = etAddress.getText().toString();
+                String Sgender = spinnerGender.getSelectedItem().toString();
+                String Sphone = etPhone.getText().toString();
+                if (Susername.isEmpty() || Spassword.isEmpty() || Sbirthdate.isEmpty() || Saddress.isEmpty()) {
+                    Toast.makeText(register.this, "Isi Semua Kolom di atas", Toast.LENGTH_SHORT).show();
+                } else if (Sphone.isEmpty()) {
+                    Toast.makeText(register.this, "Masukkan nomor telepon", Toast.LENGTH_SHORT).show();
+                } else if (!Spassword.equals(SverifyPassword)) {
+                    Toast.makeText(register.this, "Password tidak sama", Toast.LENGTH_SHORT).show();
+                } else if (!android.text.TextUtils.isDigitsOnly(Sphone)) {
                     Toast.makeText(register.this, "Nomor telepon hanya boleh berisi angka", Toast.LENGTH_SHORT).show();
                 } else {
-//                        Intent intent = new Intent(register.this, login.class);
-//                        intent.putExtra("email", email); // Kirim email ke LoginActivity
-//                        intent.putExtra("password", password);
-//                        intent.putExtra("fullname", fullname);
-//                        intent.putExtra("username", username);
-//                        intent.putExtra("gender", gender);
-//                        intent.putExtra("birthdate", birthdate);
-//                        intent.putExtra("address", address);
-//                        intent.putExtra("phone", phone);
-//                        startActivity(intent);
-                        Toast.makeText(register.this, "Registrasi berhasil", Toast.LENGTH_SHORT).show();
-
-
-                        finish();
-                    }  }
+                    CreateDataToServer(Susername, Semail, Spassword, Sgender, Sbirthdate, Saddress, Sphone);
+                    Toast.makeText(register.this, "Registrasi berhasil", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
         });
     }
 
