@@ -121,6 +121,9 @@ public class login extends AppCompatActivity {
                                     String resp = jsonObject.getString("server_response");
                                     if(resp.equals("[{\"status\":\"OK\"}]")) {
                                         Toast.makeText(getApplicationContext(), "Login berhasil", Toast.LENGTH_SHORT).show();
+                                        Intent dashboardIntent = new Intent(login.this, Dashboard.class);
+                                        dashboardIntent.putExtra("email", email);
+                                        startActivity(dashboardIntent);
                                     } else {
                                         Toast.makeText(getApplicationContext(), resp, Toast.LENGTH_SHORT).show();
                                     }
