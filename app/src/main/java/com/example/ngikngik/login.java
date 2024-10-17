@@ -68,42 +68,7 @@ public class login extends AppCompatActivity {
                 }
             }
         });
-//        btnLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Ambil input dari EditText
-//                String emailInput = etEmail.getText().toString();
-//                String passwordInput = etPassword.getText().toString();
 //
-//                // Logika verifikasi login
-//                if (emailInput.equals(email) && passwordInput.equals(password)) {
-//                    // Kirim data dari EditText ke Dashboard
-//                    Intent dashboardIntent = new Intent(login.this, Dashboard.class);
-//                    dashboardIntent.putExtra("fullname", getIntent().getStringExtra("fullname"));
-//                    dashboardIntent.putExtra("username", getIntent().getStringExtra("username"));
-//                    dashboardIntent.putExtra("email", emailInput);  // Data dari EditText
-//                    dashboardIntent.putExtra("gender", getIntent().getStringExtra("gender"));
-//                    dashboardIntent.putExtra("birthdate", getIntent().getStringExtra("birthdate"));
-//                    dashboardIntent.putExtra("address", getIntent().getStringExtra("address"));
-//                    dashboardIntent.putExtra("phone", getIntent().getStringExtra("phone"));
-//
-//                    startActivity(dashboardIntent);
-//                    finish(); // Tutup LoginActivity
-//                } else {
-//                    Toast.makeText(login.this, "Email atau Password salah", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-
-        // Dapatkan data yang dikirim dari RegisterActivity
-//        Intent intent = getIntent();
-//        String email = intent.getStringExtra("email");
-//        String password = intent.getStringExtra("password");
-//        if (email != null) {
-//            etEmail.setText(email);
-//        }
-
-
         etEmail = (EditText) findViewById(R.id.etEmailLogin);
         etPassword = (EditText) findViewById(R.id.etPasswordLogin);
         btnLogin = (Button) findViewById(R.id.btn_login2);
