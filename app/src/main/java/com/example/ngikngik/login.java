@@ -56,6 +56,7 @@ public class login extends AppCompatActivity {
 
         ImageView imageViewShowHidePw = findViewById(R.id.imageView_show_hide_pw);
         imageViewShowHidePw.setImageResource(R.drawable.tutupmatapw);
+        imageViewShowHidePw.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         imageViewShowHidePw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
