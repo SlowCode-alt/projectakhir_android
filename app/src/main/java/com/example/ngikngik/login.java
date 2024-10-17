@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,6 +55,8 @@ public class login extends AppCompatActivity {
             return insets;
         });
 
+
+
         ImageView imageViewShowHidePw = findViewById(R.id.imageView_show_hide_pw);
         imageViewShowHidePw.setImageResource(R.drawable.tutupmatapw);
         imageViewShowHidePw.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
@@ -69,6 +72,27 @@ public class login extends AppCompatActivity {
                 }
             }
         });
+        imageViewShowHidePw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Simpan posisi kursor saat ini
+                int cursorPosition = etPassword.getSelectionStart();
+
+                if (etPassword.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())) {
+                    // Ganti ke mode sembunyi password
+                    etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    imageViewShowHidePw.setImageResource(R.drawable.tutupmatapw);
+                } else {
+                    // Ganti ke mode tampil password
+                    etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    imageViewShowHidePw.setImageResource(R.drawable.tampilmatapw);
+                }
+
+                // Kembalikan posisi kursor ke tempat sebelumnya
+                etPassword.setSelection(cursorPosition);
+            }
+        });
+
 //
         etEmail = (EditText) findViewById(R.id.etEmailLogin);
         etPassword = (EditText) findViewById(R.id.etPasswordLogin);
@@ -101,25 +125,32 @@ public class login extends AppCompatActivity {
                             @Override
                                 public void onResponse(String response) {
                                 try {
+                                    Log.d("LoginResponse", "Response: " + response);
+
                                     JSONObject jsonObject = new JSONObject(response);
-                                    String resp = jsonObject.getString("server_response");
-                                    if(resp.equals("[{\"status\":\"OK\"}]")) {
+                                    String serverResponse = jsonObject.getString("server_response");
+
+                                    if (serverResponse.equals("login berhasil")) {
                                         Toast.makeText(getApplicationContext(), "Login berhasil", Toast.LENGTH_SHORT).show();
                                         Intent dashboardIntent = new Intent(login.this, Dashboard.class);
                                         dashboardIntent.putExtra("email", email);
                                         startActivity(dashboardIntent);
+                                        finish();
                                     } else {
-                                        Toast.makeText(getApplicationContext(), resp, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Email dan password salah", Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (JSONException e) {
-                                    throw new RuntimeException(e);
+                                    e.printStackTrace();
+                                    Toast.makeText(getApplicationContext(), "Terjadi kesalahan dalam parsing respon server", Toast.LENGTH_SHORT).show();
+                                } finally {
+                                    progressDialog.dismiss();
                                 }
-
                             }
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                    progressDialog.dismiss();
+                    Toast.makeText(getApplicationContext(), "Terjadi kesalahan, coba lagi", Toast.LENGTH_SHORT).show();
                     }
                 }){
                     @Override
