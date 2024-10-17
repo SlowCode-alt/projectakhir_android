@@ -7,9 +7,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +42,7 @@ public class login extends AppCompatActivity {
     ProgressDialog progressDialog;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +54,20 @@ public class login extends AppCompatActivity {
             return insets;
         });
 
+        ImageView imageViewShowHidePw = findViewById(R.id.imageView_show_hide_pw);
+        imageViewShowHidePw.setImageResource(R.drawable.tutupmatapw);
+        imageViewShowHidePw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (etPassword.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())){
+                    etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    imageViewShowHidePw.setImageResource(R.drawable.tutupmatapw);
+                }else {
+                    etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    imageViewShowHidePw.setImageResource(R.drawable.tampilmatapw);
+                }
+            }
+        });
 //        btnLogin.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

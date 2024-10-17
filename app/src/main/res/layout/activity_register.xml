@@ -47,7 +47,7 @@
                 android:hint=" Nama Siswa" />
 
             <EditText
-                android:id="@+id/etEmailLogin"
+                android:id="@+id/etEmailRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
@@ -57,7 +57,7 @@
                 android:inputType="textEmailAddress" />
 
             <EditText
-                android:id="@+id/etPasswordLogin"
+                android:id="@+id/etPasswordRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
