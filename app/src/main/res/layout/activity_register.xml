@@ -44,7 +44,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:drawableEnd="@drawable/ic_person"
-                android:hint=" Nama Siswa" />
+                android:hint=" Nama Siswa"
+                android:textColorHint="#817D7D"
+                android:textColor="#000000"
+                android:textColorLink="#000000" />
 
             <EditText
                 android:id="@+id/etEmailRegister"
@@ -53,6 +56,9 @@
                 android:layout_marginTop="3dp"
                 android:drawableEnd="@drawable/ic_email"
                 android:ems="10"
+                android:textColorHint="#817D7D"
+                android:textColor="#000000"
+                android:textColorLink="#000000"
                 android:hint=" Masukkan email"
                 android:inputType="textEmailAddress" />
 
@@ -63,13 +69,17 @@
                 android:layout_marginTop="3dp"
                 android:drawableEnd="@drawable/ic_gembok"
                 android:hint=" Password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textColorHint="#817D7D"
+                android:textColorLink="#000000" />
 
             <EditText
                 android:id="@+id/etVerificationPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
+                android:textColorHint="#817D7D"
+
                 android:drawableEnd="@drawable/ic_gembok"
                 android:hint=" Verification Password"
                 android:inputType="textPassword" />
@@ -88,6 +98,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:clickable="true"
+                android:textColor="#000000"
+                android:textColorHint="#817D7D"
                 android:drawableEnd="@drawable/ic_date"
                 android:focusable="false"
                 android:hint="Tanggal Lahir" />
@@ -97,6 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
+                android:textColorHint="#817D7D"
                 android:drawableEnd="@drawable/ic_location"
                 android:hint="Alamat" />
 
@@ -107,6 +120,7 @@
                 android:layout_marginTop="3dp"
                 android:drawableEnd="@drawable/ic_person"
                 android:ems="10"
+                android:textColorHint="#817D7D"
                 android:hapticFeedbackEnabled="true"
                 android:hint="Nomer Telepon"
                 android:inputType="phone" />
